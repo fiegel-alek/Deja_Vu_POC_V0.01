@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "name": "demo_static_batch",
+  "description": "Static image inference batch for alert pipeline testing.",
+  "images": [
+    {
+      "id": "demo_frame_0001",
+      "file_name": "data/raw/demo/demo_frame_0001.jpg",
+      "timestamp_ms": 1000,
+      "width": 1280,
+      "height": 720,
+      "detections": [
+        {
+          "label": "handgun_visible",
+          "confidence": 0.86,
+          "bbox_xywh": [
+            590,
+            310,
+            96,
+            64
+          ],
+          "direction": "ahead"
+        }
+      ]
+    },
+    {
+      "id": "demo_frame_0002",
+      "file_name": "data/raw/demo/demo_frame_0002.jpg",
+      "timestamp_ms": 2000,
+      "width": 1280,
+      "height": 720,
+      "detections": [
+        {
+          "label": "low_light",
+          "confidence": 0.71
+        },
+        {
+          "label": "umbrella_visible",
+          "confidence": 0.99,
+          "bbox_xywh": [
+            120,
+            90,
+            280,
+            620
+          ],
+          "direction": "left"
+        }
+      ]
+    },
+    {
+      "id": "demo_frame_0003",
+      "file_name": "data/raw/demo/demo_frame_0003.jpg",
+      "timestamp_ms": 7000,
+      "width": 1280,
+      "height": 720,
+      "detections": [
+        {
+          "label": "fire_or_smoke",
+          "confidence": 0.78,
+          "bbox_xywh": [
+            80,
+            40,
+            420,
+            280
+          ],
+          "direction": "right"
+        }
+      ]
+    }
+  ]
+}
