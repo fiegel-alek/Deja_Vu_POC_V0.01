@@ -40,6 +40,8 @@ The near-term demo should prove the full loop without requiring a perfect custom
 
 ## Demo 6: Custom Dataset Evaluation
 
+- Generate a synthetic dataset seed for pipeline tests.
+- Capture controlled real images with replica objects and benign lookalikes.
 - Validate collected manifests.
 - Train or fine-tune a small object detector.
 - Export to Android-compatible model format.
