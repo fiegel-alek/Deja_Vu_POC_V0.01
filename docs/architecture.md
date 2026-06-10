@@ -48,6 +48,12 @@ Produces structured detections:
 
 Keep labels tied to observable objects or hazards. Avoid labels such as `hostile_person`, `suspicious_person`, or `aggressive_intent`.
 
+The Android scaffold models this boundary with:
+
+- `CameraFrame`: timestamped frame metadata and future pixel payload.
+- `HazardDetector`: interface that turns frames into detections.
+- `DemoHazardDetector`: local demo detector used until DAT frames and a real model are connected.
+
 ### Alert Policy Engine
 
 Applies thresholds, severity ordering, cooldowns, and clear language. It is intentionally separate from the model so you can tune behavior without retraining.

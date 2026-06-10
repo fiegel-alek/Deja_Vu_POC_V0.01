@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.metatroop.situationalawareness.alert.AlertEngine
 import com.metatroop.situationalawareness.device.DemoGlassesGateway
 import com.metatroop.situationalawareness.device.GlassesGateway
+import com.metatroop.situationalawareness.vision.HazardDetector
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,6 +23,7 @@ data class SituationalAwarenessUiState(
 class SituationalAwarenessViewModel(
     private val alertEngine: AlertEngine,
     private val glassesGateway: GlassesGateway,
+    private val hazardDetector: HazardDetector,
 ) : ViewModel() {
     private val mutableState = MutableStateFlow(SituationalAwarenessUiState())
     val state: StateFlow<SituationalAwarenessUiState> = mutableState.asStateFlow()
@@ -34,7 +36,8 @@ class SituationalAwarenessViewModel(
         }
 
         viewModelScope.launch {
-            glassesGateway.detections.collectLatest { detections ->
+            glassesGateway.frames.collectLatest { frame ->
+                val detections = hazardDetector.detect(frame)
                 val alerts = alertEngine.evaluate(detections)
                 alerts.firstOrNull()?.let { alert ->
                     glassesGateway.speak(alert.message)
@@ -66,9 +69,10 @@ class SituationalAwarenessViewModel(
 class SituationalAwarenessViewModelFactory(
     private val alertEngine: AlertEngine,
     private val glassesGateway: GlassesGateway,
+    private val hazardDetector: HazardDetector,
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return SituationalAwarenessViewModel(alertEngine, glassesGateway) as T
+        return SituationalAwarenessViewModel(alertEngine, glassesGateway, hazardDetector) as T
     }
 }

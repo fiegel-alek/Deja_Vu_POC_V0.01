@@ -1,11 +1,11 @@
 package com.metatroop.situationalawareness.device
 
-import com.metatroop.situationalawareness.alert.Detection
+import com.metatroop.situationalawareness.vision.CameraFrame
 import kotlinx.coroutines.flow.Flow
 
 interface GlassesGateway {
     val deviceStatus: Flow<String>
-    val detections: Flow<List<Detection>>
+    val frames: Flow<CameraFrame>
 
     suspend fun startSession()
     suspend fun stopSession()

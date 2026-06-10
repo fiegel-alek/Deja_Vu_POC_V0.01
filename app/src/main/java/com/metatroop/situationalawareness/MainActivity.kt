@@ -28,6 +28,7 @@ import com.metatroop.situationalawareness.alert.DetectionClassRepository
 import com.metatroop.situationalawareness.device.DemoGlassesGateway
 import com.metatroop.situationalawareness.ui.SituationalAwarenessViewModel
 import com.metatroop.situationalawareness.ui.SituationalAwarenessViewModelFactory
+import com.metatroop.situationalawareness.vision.DemoHazardDetector
 
 class MainActivity : ComponentActivity() {
     private val viewModel: SituationalAwarenessViewModel by viewModels {
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
         SituationalAwarenessViewModelFactory(
             alertEngine = AlertEngine(repository.load()),
             glassesGateway = DemoGlassesGateway(),
+            hazardDetector = DemoHazardDetector(),
         )
     }
 
