@@ -9,3 +9,4 @@ __pycache__/
 
 app/build/
 captures/
+third_party_refs/
