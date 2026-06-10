@@ -18,8 +18,9 @@ The near-term demo should prove the full loop without requiring a perfect custom
 
 ## Demo 3: Phone Camera Detector
 
+- Process static test images before live camera.
 - Add MediaPipe object detector to Android.
-- Use phone camera or static test images before DAT frames.
+- Use phone camera before DAT frames.
 - Map detector categories into `Detection` values.
 - Apply the existing alert engine and spoken output.
 
