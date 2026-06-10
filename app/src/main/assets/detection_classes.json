@@ -8,6 +8,24 @@
       "severity": 5
     },
     {
+      "label": "handgun_visible",
+      "spoken_name": "possible handgun visible",
+      "threshold": 0.78,
+      "severity": 5
+    },
+    {
+      "label": "long_gun_visible",
+      "spoken_name": "possible long gun visible",
+      "threshold": 0.78,
+      "severity": 5
+    },
+    {
+      "label": "knife_visible",
+      "spoken_name": "possible knife visible",
+      "threshold": 0.75,
+      "severity": 5
+    },
+    {
       "label": "vehicle_approaching",
       "spoken_name": "vehicle approaching",
       "threshold": 0.7,
