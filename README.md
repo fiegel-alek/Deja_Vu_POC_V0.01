@@ -30,6 +30,14 @@ Build a paired mobile app:
 python3 -m unittest discover -s tests
 ```
 
+## Run A Scenario
+
+```bash
+python3 scripts/run_scenario.py scenarios/weapon_cooldown.json
+```
+
+Scenarios exercise the alert brain without Android hardware. They load detections, apply thresholds and cooldowns, print suppressed detections with reasons, and show spoken callouts.
+
 ## Next Implementation Step
 
 Pick Android or iOS as the first mobile platform, then wire the Meta Wearables DAT camera stream into `AlertEngine`. Android is usually the fastest first target if you want to lean on the public DAT Android samples and Kotlin.

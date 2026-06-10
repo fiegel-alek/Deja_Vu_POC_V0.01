@@ -1,0 +1,36 @@
+{
+  "name": "weapon_cooldown",
+  "description": "A high-confidence visible object repeats before and after cooldown.",
+  "frames": [
+    {
+      "timestamp_ms": 1000,
+      "detections": [
+        {
+          "label": "weapon_visible",
+          "confidence": 0.82,
+          "direction": "ahead"
+        }
+      ]
+    },
+    {
+      "timestamp_ms": 2000,
+      "detections": [
+        {
+          "label": "weapon_visible",
+          "confidence": 0.9,
+          "direction": "ahead"
+        }
+      ]
+    },
+    {
+      "timestamp_ms": 7000,
+      "detections": [
+        {
+          "label": "weapon_visible",
+          "confidence": 0.9,
+          "direction": "ahead"
+        }
+      ]
+    }
+  ]
+}

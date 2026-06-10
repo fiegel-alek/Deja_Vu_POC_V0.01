@@ -1,0 +1,26 @@
+{
+  "name": "multiple_hazards",
+  "description": "Multiple detections appear in one frame, and severity decides the callout.",
+  "frames": [
+    {
+      "timestamp_ms": 1000,
+      "detections": [
+        {
+          "label": "person_close",
+          "confidence": 0.99,
+          "direction": "left"
+        },
+        {
+          "label": "fire_or_smoke",
+          "confidence": 0.77,
+          "direction": "ahead"
+        },
+        {
+          "label": "weapon_visible",
+          "confidence": 0.76,
+          "direction": "right"
+        }
+      ]
+    }
+  ]
+}

@@ -19,3 +19,6 @@ jobs:
 
       - name: Run tests
         run: python -m unittest discover -s tests
+
+      - name: Run sample scenario
+        run: python scripts/run_scenario.py scenarios/weapon_cooldown.json

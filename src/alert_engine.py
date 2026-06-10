@@ -31,6 +31,23 @@ class Alert:
     severity: int
 
 
+@dataclass
+class EvaluationEvent:
+    label: str
+    confidence: float
+    timestamp_ms: int
+    status: str
+    reason: str
+    direction: Optional[str] = None
+    message: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class EvaluationResult:
+    alerts: list[Alert]
+    events: list[EvaluationEvent]
+
+
 class AlertEngine:
     def __init__(
         self,
@@ -62,14 +79,38 @@ class AlertEngine:
         )
 
     def evaluate(self, detections: Iterable[Detection]) -> list[Alert]:
-        candidates = []
+        return self.evaluate_with_audit(detections).alerts
+
+    def evaluate_with_audit(self, detections: Iterable[Detection]) -> EvaluationResult:
+        candidates: list[tuple[Alert, EvaluationEvent]] = []
+        events: list[EvaluationEvent] = []
 
         for detection in detections:
             detection_class = self._classes.get(detection.label)
             if detection_class is None:
+                events.append(
+                    EvaluationEvent(
+                        label=detection.label,
+                        confidence=detection.confidence,
+                        timestamp_ms=detection.timestamp_ms,
+                        direction=detection.direction,
+                        status="suppressed",
+                        reason="unknown_label",
+                    )
+                )
                 continue
 
             if detection.confidence < detection_class.threshold:
+                events.append(
+                    EvaluationEvent(
+                        label=detection.label,
+                        confidence=detection.confidence,
+                        timestamp_ms=detection.timestamp_ms,
+                        direction=detection.direction,
+                        status="suppressed",
+                        reason="below_threshold",
+                    )
+                )
                 continue
 
             last_alert_ms = self._last_alert_by_label.get(detection.label)
@@ -77,17 +118,48 @@ class AlertEngine:
                 last_alert_ms is not None
                 and detection.timestamp_ms - last_alert_ms < self._default_cooldown_ms
             ):
+                events.append(
+                    EvaluationEvent(
+                        label=detection.label,
+                        confidence=detection.confidence,
+                        timestamp_ms=detection.timestamp_ms,
+                        direction=detection.direction,
+                        status="suppressed",
+                        reason="cooldown",
+                    )
+                )
                 continue
 
-            candidates.append(self._to_alert(detection, detection_class))
+            alert = self._to_alert(detection, detection_class)
+            event = EvaluationEvent(
+                label=detection.label,
+                confidence=detection.confidence,
+                timestamp_ms=detection.timestamp_ms,
+                direction=detection.direction,
+                status="candidate",
+                reason="threshold_met",
+                message=alert.message,
+            )
+            events.append(event)
+            candidates.append((alert, event))
 
-        candidates.sort(key=lambda alert: (alert.severity, alert.confidence), reverse=True)
-        alerts = candidates[: self._max_alerts_per_frame]
+        candidates.sort(key=lambda candidate: (candidate[0].severity, candidate[0].confidence), reverse=True)
+        selected = candidates[: self._max_alerts_per_frame]
+        alerts = [alert for alert, _ in selected]
+
+        selected_event_ids = {id(event) for _, event in selected}
+        for _, event in candidates:
+            if id(event) in selected_event_ids:
+                event.status = "emitted"
+                event.reason = "selected"
+            else:
+                event.status = "suppressed"
+                event.reason = "lower_priority"
 
         for alert in alerts:
             self._last_alert_by_label[alert.label] = alert.timestamp_ms
 
-        return alerts
+        return EvaluationResult(alerts=alerts, events=events)
 
     def _to_alert(
         self,
