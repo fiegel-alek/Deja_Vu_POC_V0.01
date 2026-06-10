@@ -19,6 +19,7 @@ The near-term demo should prove the full loop without requiring a perfect custom
 ## Demo 3: Phone Camera Detector
 
 - Process static test images before live camera.
+- Import MediaPipe-style detector output through the category map.
 - Add MediaPipe object detector to Android.
 - Use phone camera before DAT frames.
 - Map detector categories into `Detection` values.
@@ -42,6 +43,7 @@ The near-term demo should prove the full loop without requiring a perfect custom
 
 - Generate a synthetic dataset seed for pipeline tests.
 - Capture controlled real images with replica objects and benign lookalikes.
+- Follow `docs/controlled-capture-protocol.md` for capture sessions.
 - Validate collected manifests.
 - Train or fine-tune a small object detector.
 - Export to Android-compatible model format.

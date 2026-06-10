@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "description": "Maps generic detector category names into approved project labels.",
+  "categories": {
+    "knife": {
+      "label": "knife_visible",
+      "min_confidence": 0.55
+    },
+    "person": {
+      "label": "person_close",
+      "min_confidence": 0.75
+    },
+    "car": {
+      "label": "vehicle_approaching",
+      "min_confidence": 0.65
+    },
+    "truck": {
+      "label": "vehicle_approaching",
+      "min_confidence": 0.65
+    },
+    "bus": {
+      "label": "vehicle_approaching",
+      "min_confidence": 0.65
+    },
+    "fire": {
+      "label": "fire_or_smoke",
+      "min_confidence": 0.6
+    },
+    "smoke": {
+      "label": "fire_or_smoke",
+      "min_confidence": 0.6
+    }
+  },
+  "ignored_categories": [
+    "cell phone",
+    "umbrella",
+    "sports ball",
+    "backpack"
+  ]
+}

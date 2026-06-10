@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "name": "mediapipe_static_example",
+  "description": "Example detector output shaped like MediaPipe object detection results.",
+  "images": [
+    {
+      "id": "mp_frame_0001",
+      "file_name": "data/raw/mediapipe/mp_frame_0001.jpg",
+      "timestamp_ms": 1000,
+      "width": 1280,
+      "height": 720,
+      "detections": [
+        {
+          "category": "knife",
+          "score": 0.81,
+          "bbox_xywh": [
+            490,
+            310,
+            110,
+            62
+          ],
+          "direction": "ahead"
+        }
+      ]
+    },
+    {
+      "id": "mp_frame_0002",
+      "file_name": "data/raw/mediapipe/mp_frame_0002.jpg",
+      "timestamp_ms": 2000,
+      "width": 1280,
+      "height": 720,
+      "detections": [
+        {
+          "category": "cell phone",
+          "score": 0.91,
+          "bbox_xywh": [
+            220,
+            180,
+            100,
+            180
+          ],
+          "direction": "left"
+        },
+        {
+          "category": "person",
+          "score": 0.86,
+          "bbox_xywh": [
+            760,
+            80,
+            260,
+            600
+          ],
+          "direction": "right"
+        }
+      ]
+    },
+    {
+      "id": "mp_frame_0003",
+      "file_name": "data/raw/mediapipe/mp_frame_0003.jpg",
+      "timestamp_ms": 7000,
+      "width": 1280,
+      "height": 720,
+      "detections": [
+        {
+          "category": "umbrella",
+          "score": 0.94,
+          "bbox_xywh": [
+            100,
+            100,
+            420,
+            330
+          ],
+          "direction": "ahead"
+        },
+        {
+          "category": "car",
+          "score": 0.72,
+          "bbox_xywh": [
+            520,
+            260,
+            360,
+            220
+          ],
+          "direction": "ahead"
+        }
+      ]
+    }
+  ]
+}
