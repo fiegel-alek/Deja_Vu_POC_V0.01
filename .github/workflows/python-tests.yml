@@ -28,3 +28,6 @@ jobs:
 
       - name: Process static image detection batch
         run: python scripts/process_static_images.py data/static-image-batch.example.json
+
+      - name: Generate synthetic dataset seed
+        run: python scripts/generate_synthetic_dataset.py --output-dir /tmp/synthetic_seed --count 12

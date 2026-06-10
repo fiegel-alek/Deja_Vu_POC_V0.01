@@ -56,6 +56,14 @@ python3 scripts/process_static_images.py data/static-image-batch.example.json
 
 Static image batches are the first model-integration milestone. They let us test detector output, alert decisions, and audit reasons before moving to a constant live camera stream.
 
+## Generate Synthetic Dataset Seed
+
+```bash
+python3 scripts/generate_synthetic_dataset.py --count 60
+```
+
+Synthetic data helps exercise the dataset and future training pipeline before real camera captures are ready. Real images are still required for fine-tuning and validation.
+
 ## Next Implementation Step
 
 Pick Android or iOS as the first mobile platform, then wire the Meta Wearables DAT camera stream into `AlertEngine`. Android is usually the fastest first target if you want to lean on the public DAT Android samples and Kotlin.
