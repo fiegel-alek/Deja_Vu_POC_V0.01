@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "classes": [
+    {
+      "label": "weapon_visible",
+      "spoken_name": "possible weapon visible",
+      "threshold": 0.75,
+      "severity": 5
+    },
+    {
+      "label": "vehicle_approaching",
+      "spoken_name": "vehicle approaching",
+      "threshold": 0.7,
+      "severity": 4
+    },
+    {
+      "label": "fire_or_smoke",
+      "spoken_name": "fire or smoke visible",
+      "threshold": 0.65,
+      "severity": 4
+    },
+    {
+      "label": "obstacle",
+      "spoken_name": "obstacle ahead",
+      "threshold": 0.7,
+      "severity": 3
+    },
+    {
+      "label": "person_close",
+      "spoken_name": "person close",
+      "threshold": 0.8,
+      "severity": 2
+    },
+    {
+      "label": "low_light",
+      "spoken_name": "low light, detection confidence reduced",
+      "threshold": 0.6,
+      "severity": 1
+    }
+  ],
+  "default_cooldown_ms": 5000,
+  "max_alerts_per_frame": 1
+}

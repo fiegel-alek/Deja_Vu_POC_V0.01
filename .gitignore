@@ -1,0 +1,11 @@
+.gradle/
+.idea/
+*.iml
+build/
+local.properties
+
+__pycache__/
+*.py[cod]
+
+app/build/
+captures/
