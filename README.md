@@ -22,6 +22,7 @@ Build a paired mobile app:
 - `docs/safety-boundaries.md`: What the system should and should not classify.
 - `docs/hud-display-design.md`: Optional lens display / HUD behavior.
 - `docs/branching-strategy.md`: Branch flow for `dev`, `test`, and `main`.
+- `docs/controlled-capture-protocol.md`: Real-world capture protocol for replica objects and hard negatives.
 - `configs/detection_classes.json`: Initial observable classes and alert thresholds.
 - `src/alert_engine.py`: Dependency-free alert policy engine.
 - `tests/test_alert_engine.py`: Unit tests for thresholds, cooldowns, and wording.
@@ -55,6 +56,14 @@ python3 scripts/process_static_images.py data/static-image-batch.example.json
 ```
 
 Static image batches are the first model-integration milestone. They let us test detector output, alert decisions, and audit reasons before moving to a constant live camera stream.
+
+## Import Detector Output
+
+```bash
+python3 scripts/import_detector_output.py data/detector-output.example.json
+```
+
+Detector import maps generic model categories into approved project labels before they reach the alert engine.
 
 ## Generate Synthetic Dataset Seed
 
