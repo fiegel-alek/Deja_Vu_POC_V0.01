@@ -20,6 +20,7 @@ Build a paired mobile app:
 - `docs/architecture.md`: System architecture and data flow.
 - `docs/meta-dat-notes.md`: Current Meta Wearables DAT notes and links.
 - `docs/safety-boundaries.md`: What the system should and should not classify.
+- `docs/hud-display-design.md`: Optional lens display / HUD behavior.
 - `configs/detection_classes.json`: Initial observable classes and alert thresholds.
 - `src/alert_engine.py`: Dependency-free alert policy engine.
 - `tests/test_alert_engine.py`: Unit tests for thresholds, cooldowns, and wording.

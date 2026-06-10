@@ -32,6 +32,15 @@
 - Add an emergency mute toggle.
 - Add a user-adjustable cooldown.
 
+## P1: Optional HUD
+
+- Keep `NoOpDisplayGateway` for glasses without a display.
+- Wire `MetaDatDisplayGateway` to `mwdat-display`.
+- Select only connected display-capable devices for HUD output.
+- Add a HUD mute toggle that does not disable audio callouts.
+- Render compact `HudCard` content for selected alerts.
+- Clear HUD content when monitoring stops.
+
 ## P2: Vision Model
 
 - Start with a narrow on-device detector.

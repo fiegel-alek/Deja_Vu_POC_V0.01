@@ -27,6 +27,9 @@ import com.metatroop.situationalawareness.alert.AlertEngine
 import com.metatroop.situationalawareness.alert.DetectionClassRepository
 import com.metatroop.situationalawareness.alert.InMemoryAlertLogRepository
 import com.metatroop.situationalawareness.device.DemoGlassesGateway
+import com.metatroop.situationalawareness.display.AlertHudMapper
+import com.metatroop.situationalawareness.display.DemoDisplayGateway
+import com.metatroop.situationalawareness.display.HudCapability
 import com.metatroop.situationalawareness.monitoring.FrameProcessor
 import com.metatroop.situationalawareness.ui.SituationalAwarenessViewModel
 import com.metatroop.situationalawareness.ui.SituationalAwarenessViewModelFactory
@@ -45,6 +48,8 @@ class MainActivity : ComponentActivity() {
                 alertEngine = alertEngine,
             ),
             alertLogRepository = InMemoryAlertLogRepository(),
+            displayGateway = DemoDisplayGateway(initialCapability = HudCapability.UNAVAILABLE),
+            alertHudMapper = AlertHudMapper(),
         )
     }
 
@@ -87,6 +92,19 @@ private fun AwarenessScreen(viewModel: SituationalAwarenessViewModel) {
             )
         }
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(state.hudStatus.displayText)
+            Switch(
+                checked = state.hudStatus.enabled,
+                enabled = state.hudStatus.capability == HudCapability.READY,
+                onCheckedChange = viewModel::setHudEnabled,
+            )
+        }
+
         Button(
             onClick = { viewModel.simulateHighConfidenceDetection() },
             enabled = state.monitoring,
@@ -104,6 +122,12 @@ private fun AwarenessScreen(viewModel: SituationalAwarenessViewModel) {
         Spacer(modifier = Modifier.height(8.dp))
         Text("Last callout", style = MaterialTheme.typography.titleMedium)
         Text(state.lastAlertMessage.ifBlank { "None" })
+
+        state.hudStatus.lastCard?.let { card ->
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("HUD preview", style = MaterialTheme.typography.titleMedium)
+            Text("${card.title}, ${card.confidencePercent} percent")
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
         Text("Recent alerts", style = MaterialTheme.typography.titleMedium)

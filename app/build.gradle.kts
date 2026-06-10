@@ -25,6 +25,8 @@ android {
         versionName = "0.1.0"
         manifestPlaceholders["META_DAT_APPLICATION_ID"] =
             localProperties.getProperty("META_DAT_APPLICATION_ID", "replace_with_meta_dat_app_id")
+        manifestPlaceholders["META_DAT_CLIENT_TOKEN"] =
+            localProperties.getProperty("META_DAT_CLIENT_TOKEN", "replace_with_meta_dat_client_token")
     }
 
     buildFeatures {
@@ -52,5 +54,6 @@ dependencies {
 
     implementation(libs.mwdat.core)
     implementation(libs.mwdat.camera)
+    implementation(libs.mwdat.display)
     implementation(libs.mwdat.mockdevice)
 }

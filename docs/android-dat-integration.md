@@ -6,10 +6,13 @@ This project now has an Android app shell that keeps the Meta Wearables Device A
 
 - `app/src/main/java/com/metatroop/situationalawareness/device/GlassesGateway.kt`
 - `app/src/main/java/com/metatroop/situationalawareness/device/DemoGlassesGateway.kt`
+- `app/src/main/java/com/metatroop/situationalawareness/display/DisplayGateway.kt`
+- `app/src/main/java/com/metatroop/situationalawareness/display/MetaDatDisplayGateway.kt`
 
 Create a `MetaDatGlassesGateway` beside the demo gateway once you have:
 
 - A Wearables Developer Center application id.
+- A Wearables Developer Center client token for Display/DAM flows.
 - Developer mode enabled for the glasses.
 - A GitHub token that can read GitHub Packages.
 - Physical glasses or the Mock Device Kit configured.
@@ -36,6 +39,7 @@ Create `local.properties` locally:
 ```properties
 github_token=YOUR_GITHUB_PACKAGES_TOKEN
 META_DAT_APPLICATION_ID=YOUR_META_DAT_APP_ID
+META_DAT_CLIENT_TOKEN=YOUR_META_DAT_CLIENT_TOKEN
 ```
 
 The GitHub token is required because the public DAT setup uses GitHub Packages for the Android artifacts.
@@ -49,6 +53,20 @@ The GitHub token is required because the public DAT setup uses GitHub Packages f
 5. Add pixel payload or model input handles to `CameraFrame`.
 6. Convert sampled frames into detector input.
 7. Route `GlassesGateway.speak()` to the DAT audio or device-supported speech path.
+
+## Display HUD Milestone
+
+For Meta Ray-Ban Display or future display-capable devices:
+
+1. Filter or select devices with `device.isDisplayCapable()`.
+2. Keep `NoOpDisplayGateway` for older audio-only glasses.
+3. Start the DAT session.
+4. Attach Display only after the device session is started.
+5. Wait until Display state is started.
+6. Render one compact `HudCard` per selected alert.
+7. Clear or detach the display when monitoring stops.
+
+The HUD should show visible evidence and confidence only. It should not show identity, intent, or instructions to act against a person.
 
 ## Detector Milestone
 

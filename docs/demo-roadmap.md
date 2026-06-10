@@ -30,7 +30,14 @@ The near-term demo should prove the full loop without requiring a perfect custom
 - Route callouts through the glasses speaker or paired audio output.
 - Measure latency from frame capture to spoken callout.
 
-## Demo 5: Custom Dataset Evaluation
+## Demo 5: Optional Lens HUD
+
+- Detect display-capable glasses.
+- Keep older glasses in audio-only mode.
+- Show compact HUD cards for high-priority alerts.
+- Confirm the HUD can be muted independently from audio.
+
+## Demo 6: Custom Dataset Evaluation
 
 - Validate collected manifests.
 - Train or fine-tune a small object detector.
