@@ -4,7 +4,7 @@ import com.metatroop.situationalawareness.vision.CameraFrame
 import kotlinx.coroutines.flow.Flow
 
 interface GlassesGateway {
-    val deviceStatus: Flow<String>
+    val sessionState: Flow<DeviceSessionState>
     val frames: Flow<CameraFrame>
 
     suspend fun startSession()

@@ -1,6 +1,6 @@
 # Android DAT Integration Plan
 
-This project now has an Android app shell that keeps the Meta Wearables Device Access Toolkit behind a `GlassesGateway` interface. The checked-in implementation is a `DemoGlassesGateway` so the alert flow can be developed without hardware.
+This project now has an Android app shell that keeps the Meta Wearables Device Access Toolkit behind a `GlassesGateway` interface. The checked-in implementation is a `DemoGlassesGateway` so the alert flow can be developed without hardware. `MetaDatGlassesGateway` is intentionally present as the DAT integration target, but it does not call undocumented SDK types yet.
 
 ## Files To Replace First
 
@@ -13,6 +13,21 @@ Create a `MetaDatGlassesGateway` beside the demo gateway once you have:
 - Developer mode enabled for the glasses.
 - A GitHub token that can read GitHub Packages.
 - Physical glasses or the Mock Device Kit configured.
+
+## Current Local Pipeline
+
+The app now processes sensor data through this path:
+
+```text
+GlassesGateway.frames
+    -> FrameSampler
+    -> HazardDetector
+    -> AlertEngine
+    -> AlertLogRepository
+    -> GlassesGateway.speak()
+```
+
+The sampler defaults to one accepted frame every 500 ms. That keeps the first implementation closer to a low-power awareness loop than a full video analytics pipeline.
 
 ## App Configuration
 
@@ -29,10 +44,11 @@ The GitHub token is required because the public DAT setup uses GitHub Packages f
 
 1. Build the app with the DAT dependencies resolving.
 2. Start a DAT session from `MetaDatGlassesGateway.startSession()`.
-3. Subscribe to camera frames.
-4. Convert sampled frames into detector input.
-5. Return `Detection` objects into `GlassesGateway.detections`.
-6. Route `GlassesGateway.speak()` to the DAT audio or device-supported speech path.
+3. Map DAT session lifecycle events to `DeviceSessionState`.
+4. Subscribe to camera frames and emit `CameraFrame` values from `GlassesGateway.frames`.
+5. Add pixel payload or model input handles to `CameraFrame`.
+6. Convert sampled frames into detector input.
+7. Route `GlassesGateway.speak()` to the DAT audio or device-supported speech path.
 
 ## Detector Milestone
 

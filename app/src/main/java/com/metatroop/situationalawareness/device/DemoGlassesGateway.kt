@@ -8,22 +8,23 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class DemoGlassesGateway : GlassesGateway {
-    private val mutableDeviceStatus = MutableStateFlow("Disconnected")
+    private val mutableSessionState = MutableStateFlow(DeviceSessionState.DISCONNECTED)
     private val mutableFrames = MutableSharedFlow<CameraFrame>(extraBufferCapacity = 8)
+    private var lastSpokenMessage: String = ""
 
-    override val deviceStatus: Flow<String> = mutableDeviceStatus.asStateFlow()
+    override val sessionState: Flow<DeviceSessionState> = mutableSessionState.asStateFlow()
     override val frames: Flow<CameraFrame> = mutableFrames.asSharedFlow()
 
     override suspend fun startSession() {
-        mutableDeviceStatus.value = "Mock device session running"
+        mutableSessionState.value = DeviceSessionState.RUNNING
     }
 
     override suspend fun stopSession() {
-        mutableDeviceStatus.value = "Stopped"
+        mutableSessionState.value = DeviceSessionState.STOPPED
     }
 
     override suspend fun speak(message: String) {
-        mutableDeviceStatus.value = "Spoke: $message"
+        lastSpokenMessage = message
     }
 
     fun emitDemoDetection() {
@@ -38,4 +39,6 @@ class DemoGlassesGateway : GlassesGateway {
             ),
         )
     }
+
+    fun latestSpokenMessage(): String = lastSpokenMessage
 }

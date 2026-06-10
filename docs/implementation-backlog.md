@@ -12,7 +12,7 @@
 
 - Replace `DemoGlassesGateway` with `MetaDatGlassesGateway`.
 - Implement DAT session start and stop.
-- Expose session state through `GlassesGateway.deviceStatus`.
+- Expose session state through `GlassesGateway.sessionState`.
 - Add Mock Device Kit support before relying on physical glasses.
 - Add explicit UI states for disconnected, connecting, running, paused, and error.
 

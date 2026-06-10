@@ -25,18 +25,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.metatroop.situationalawareness.alert.AlertEngine
 import com.metatroop.situationalawareness.alert.DetectionClassRepository
+import com.metatroop.situationalawareness.alert.InMemoryAlertLogRepository
 import com.metatroop.situationalawareness.device.DemoGlassesGateway
+import com.metatroop.situationalawareness.monitoring.FrameProcessor
 import com.metatroop.situationalawareness.ui.SituationalAwarenessViewModel
 import com.metatroop.situationalawareness.ui.SituationalAwarenessViewModelFactory
 import com.metatroop.situationalawareness.vision.DemoHazardDetector
+import com.metatroop.situationalawareness.vision.FrameSampler
 
 class MainActivity : ComponentActivity() {
     private val viewModel: SituationalAwarenessViewModel by viewModels {
         val repository = DetectionClassRepository(assets)
+        val alertEngine = AlertEngine(repository.load())
         SituationalAwarenessViewModelFactory(
-            alertEngine = AlertEngine(repository.load()),
             glassesGateway = DemoGlassesGateway(),
-            hazardDetector = DemoHazardDetector(),
+            frameProcessor = FrameProcessor(
+                frameSampler = FrameSampler(),
+                hazardDetector = DemoHazardDetector(),
+                alertEngine = alertEngine,
+            ),
+            alertLogRepository = InMemoryAlertLogRepository(),
         )
     }
 
@@ -63,7 +71,7 @@ private fun AwarenessScreen(viewModel: SituationalAwarenessViewModel) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text("Situational Awareness", style = MaterialTheme.typography.headlineMedium)
-        Text(state.deviceStatus, style = MaterialTheme.typography.bodyLarge)
+        Text(state.sessionState.displayText, style = MaterialTheme.typography.bodyLarge)
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -87,7 +95,20 @@ private fun AwarenessScreen(viewModel: SituationalAwarenessViewModel) {
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+        Text("Telemetry", style = MaterialTheme.typography.titleMedium)
+        Text("Frames seen: ${state.framesSeen}")
+        Text("Frames processed: ${state.framesProcessed}")
+        Text("Detections evaluated: ${state.detectionsEvaluated}")
+        Text("Alerts spoken: ${state.alertsSpoken}")
+
+        Spacer(modifier = Modifier.height(8.dp))
         Text("Last callout", style = MaterialTheme.typography.titleMedium)
         Text(state.lastAlertMessage.ifBlank { "None" })
+
+        Spacer(modifier = Modifier.height(8.dp))
+        Text("Recent alerts", style = MaterialTheme.typography.titleMedium)
+        state.alertLog.take(3).forEach { entry ->
+            Text(entry.message)
+        }
     }
 }
