@@ -7,6 +7,7 @@
 - Add the GitHub Packages token locally as `github_token` in `local.properties`.
 - Add the Meta Wearables Developer Center app id locally as `META_DAT_APPLICATION_ID`.
 - Confirm DAT `0.7.0` dependency resolution.
+- Keep raw datasets out of git; validate manifests with `scripts/validate_dataset.py`.
 
 ## P1: Device Session
 

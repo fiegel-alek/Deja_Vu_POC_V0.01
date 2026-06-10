@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "name": "demo_seed_example",
+  "description": "Tiny manifest example for validator and pipeline development.",
+  "license": "example-only",
+  "source": "synthetic/example",
+  "splits": {
+    "train": [
+      "example_0001"
+    ],
+    "validation": [
+      "example_0002"
+    ],
+    "test": [
+      "example_0003"
+    ]
+  },
+  "images": [
+    {
+      "id": "example_0001",
+      "file_name": "data/raw/examples/example_0001.jpg",
+      "width": 1280,
+      "height": 720,
+      "annotations": [
+        {
+          "id": "ann_0001",
+          "label": "handgun_visible",
+          "bbox_xywh": [
+            560,
+            330,
+            120,
+            70
+          ],
+          "annotator": "example",
+          "review_status": "reviewed"
+        }
+      ]
+    },
+    {
+      "id": "example_0002",
+      "file_name": "data/raw/examples/example_0002.jpg",
+      "width": 1280,
+      "height": 720,
+      "annotations": [
+        {
+          "id": "ann_0002",
+          "label": "fire_or_smoke",
+          "bbox_xywh": [
+            100,
+            80,
+            400,
+            260
+          ],
+          "annotator": "example",
+          "review_status": "reviewed"
+        }
+      ]
+    },
+    {
+      "id": "example_0003",
+      "file_name": "data/raw/examples/example_0003.jpg",
+      "width": 1280,
+      "height": 720,
+      "annotations": []
+    }
+  ]
+}

@@ -38,6 +38,14 @@ python3 scripts/run_scenario.py scenarios/weapon_cooldown.json
 
 Scenarios exercise the alert brain without Android hardware. They load detections, apply thresholds and cooldowns, print suppressed detections with reasons, and show spoken callouts.
 
+## Validate Dataset Manifests
+
+```bash
+python3 scripts/validate_dataset.py data/dataset.example.json
+```
+
+The dataset spine lives in `data/`. It defines allowed labels, annotation shape, and validation rules for future training data.
+
 ## Next Implementation Step
 
 Pick Android or iOS as the first mobile platform, then wire the Meta Wearables DAT camera stream into `AlertEngine`. Android is usually the fastest first target if you want to lean on the public DAT Android samples and Kotlin.

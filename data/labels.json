@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "labels": [
+    {
+      "id": 1,
+      "name": "weapon_visible",
+      "parent": null,
+      "description": "A visible weapon-like object where subtype is not known.",
+      "trainable": true
+    },
+    {
+      "id": 2,
+      "name": "handgun_visible",
+      "parent": "weapon_visible",
+      "description": "A visible handgun-like object.",
+      "trainable": true
+    },
+    {
+      "id": 3,
+      "name": "long_gun_visible",
+      "parent": "weapon_visible",
+      "description": "A visible long-gun-like object.",
+      "trainable": true
+    },
+    {
+      "id": 4,
+      "name": "knife_visible",
+      "parent": "weapon_visible",
+      "description": "A visible knife-like object.",
+      "trainable": true
+    },
+    {
+      "id": 5,
+      "name": "fire_or_smoke",
+      "parent": null,
+      "description": "Visible fire, smoke, or heavy smoke plume.",
+      "trainable": true
+    },
+    {
+      "id": 6,
+      "name": "vehicle_approaching",
+      "parent": null,
+      "description": "A vehicle visible in a path or position that may require awareness.",
+      "trainable": true
+    },
+    {
+      "id": 7,
+      "name": "obstacle",
+      "parent": null,
+      "description": "A visible obstacle in the user's path.",
+      "trainable": true
+    },
+    {
+      "id": 8,
+      "name": "person_close",
+      "parent": null,
+      "description": "A person visibly close to the user without inferring intent.",
+      "trainable": true
+    },
+    {
+      "id": 9,
+      "name": "low_light",
+      "parent": null,
+      "description": "Low-light condition detected from frame statistics.",
+      "trainable": false
+    }
+  ]
+}

@@ -22,3 +22,6 @@ jobs:
 
       - name: Run sample scenario
         run: python scripts/run_scenario.py scenarios/weapon_cooldown.json
+
+      - name: Validate example dataset manifest
+        run: python scripts/validate_dataset.py data/dataset.example.json
