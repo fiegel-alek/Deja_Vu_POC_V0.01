@@ -1,0 +1,6 @@
+# Copy this file to local.properties and fill in local-only credentials.
+# Do not commit local.properties.
+
+github_token=YOUR_GITHUB_PACKAGES_TOKEN
+META_DAT_APPLICATION_ID=YOUR_META_DAT_APP_ID
+META_DAT_CLIENT_TOKEN=YOUR_META_DAT_CLIENT_TOKEN

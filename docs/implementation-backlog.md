@@ -8,6 +8,8 @@
 - Add the Meta Wearables Developer Center app id locally as `META_DAT_APPLICATION_ID`.
 - Confirm DAT `0.7.0` dependency resolution.
 - Keep raw datasets out of git; validate manifests with `scripts/validate_dataset.py`.
+- Run `scripts/preflight.py` before Android/DAT work.
+- Use `scripts/run_demo_pipeline.py` for phone-side demo validation.
 
 ## P1: Device Session
 
