@@ -26,6 +26,9 @@ jobs:
       - name: Validate example dataset manifest
         run: python scripts/validate_dataset.py data/dataset.example.json
 
+      - name: Report dataset inventory
+        run: python scripts/dataset_inventory.py data/dataset.example.json
+
       - name: Process static image detection batch
         run: python scripts/process_static_images.py data/static-image-batch.example.json
 
@@ -34,3 +37,12 @@ jobs:
 
       - name: Generate synthetic dataset seed
         run: python scripts/generate_synthetic_dataset.py --output-dir /tmp/synthetic_seed --count 12
+
+      - name: Run demo pipeline
+        run: python scripts/run_demo_pipeline.py
+
+      - name: Initialize capture session
+        run: python scripts/init_capture_session.py ci_smoke --date 20260611
+
+      - name: Run non-strict preflight
+        run: python scripts/preflight.py
