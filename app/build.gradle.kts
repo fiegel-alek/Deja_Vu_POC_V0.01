@@ -56,4 +56,5 @@ dependencies {
     implementation(libs.mwdat.camera)
     implementation(libs.mwdat.display)
     implementation(libs.mwdat.mockdevice)
+    implementation(libs.mediapipe.tasks.vision)
 }
