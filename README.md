@@ -33,6 +33,22 @@ Build a paired mobile app:
 python3 -m unittest discover -s tests
 ```
 
+## Run Local Preflight
+
+```bash
+python3 scripts/preflight.py
+```
+
+Copy `local.properties.example` to `local.properties` and fill in DAT/GitHub credentials when you are ready to build against Meta packages.
+
+## Run Demo Pipeline
+
+```bash
+python3 scripts/run_demo_pipeline.py
+```
+
+This exercises the scenario bench, static image batch, detector output importer, and synthetic dataset generator without glasses hardware.
+
 ## Run A Scenario
 
 ```bash
@@ -45,6 +61,13 @@ Scenarios exercise the alert brain without Android hardware. They load detection
 
 ```bash
 python3 scripts/validate_dataset.py data/dataset.example.json
+python3 scripts/dataset_inventory.py data/dataset.example.json
+```
+
+Create a local capture session for real replica-object photos:
+
+```bash
+python3 scripts/init_capture_session.py basement_replica_set
 ```
 
 The dataset spine lives in `data/`. It defines allowed labels, annotation shape, and validation rules for future training data.

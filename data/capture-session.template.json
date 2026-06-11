@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "capture_YYYYMMDD_location",
+  "description": "Controlled capture session manifest starter.",
+  "license": "internal-controlled-capture",
+  "source": "controlled replica-object capture",
+  "splits": {
+    "train": [],
+    "validation": [],
+    "test": []
+  },
+  "images": []
+}
